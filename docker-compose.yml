@@ -1,0 +1,41 @@
+version: '2'
+services:
+
+ web_server:
+  image: nginx:latest
+  container_name: webserver
+  ports:
+   - '80:80'
+  volumes:
+   - ./nginx:/etc/nginx/conf.d
+   - ./nginx/logs:/var/log/nginx
+  links:
+   - wp_adityacitrapersada.com
+  restart: always
+  #command: [nginx-debug, '-g', 'daemon off;']
+#=============================================================
+ wp_adityacitrapersada.com:
+  container_name: adityacitrapersada_wp
+  build : ./adityacitrapersada/adityacitrapersada_wp/
+  restart: always
+  hostname: adityacitrapersada_wp
+  environment:
+   WORDPRESS_DB_USER: root
+   WORDPRESS_DB_PASSWORD: dockerpass010819
+   WORDPRESS_DB_NAME: acpgroup
+  ports:
+   - "127.0.0.1:9000:9000"
+   - "127.0.0.1:9001:443"
+  links:
+   - db_adityacitrapersada.com:mysql
+  volumes:
+   - ./adityacitrapersada/adityacitrapersada_wp:/var/www/html
+
+ db_adityacitrapersada.com:
+  container_name: adityacitrapersada_db
+  build: ./adityacitrapersada/adityacitrapersada_db_image/
+  restart: always
+  hostname: adityacitrapersada_db
+  volumes:
+   - ./adityacitrapersada/db_live:/var/lib/mysql
+#=============================================================

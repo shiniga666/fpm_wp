@@ -1,0 +1,7 @@
+FROM mysql:5.7
+
+ENV MYSQL_ROOT_PASSWORD=dockerpass010819
+ENV MYSQL_USER=user_db
+ENV MYSQL_PASSWORD=pass_db_user
+#EXPOSE 3306
+
