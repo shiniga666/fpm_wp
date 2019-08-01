@@ -9,8 +9,10 @@ services:
   volumes:
    - ./nginx:/etc/nginx/conf.d
    - ./nginx/logs:/var/log/nginx
+   - ./adityacitrapersada/adityacitrapersada_wp:/var/www/html
   links:
    - wp_adityacitrapersada.com
+     #   - wp_alaminrotama
   restart: always
   #command: [nginx-debug, '-g', 'daemon off;']
 #=============================================================
@@ -24,8 +26,8 @@ services:
    WORDPRESS_DB_PASSWORD: dockerpass010819
    WORDPRESS_DB_NAME: acpgroup
   ports:
-   - "127.0.0.1:9000:9000"
-   - "127.0.0.1:9001:443"
+   #- "127.0.0.1:9001:9001"
+   - "127.0.0.1:9002:443"
   links:
    - db_adityacitrapersada.com:mysql
   volumes:
@@ -38,4 +40,3 @@ services:
   hostname: adityacitrapersada_db
   volumes:
    - ./adityacitrapersada/db_live:/var/lib/mysql
-#=============================================================
